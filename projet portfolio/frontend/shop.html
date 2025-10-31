@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boutique | Wardrobe</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">Wardrobe</a>
+      <nav class="main-nav">
+        <a href="index.html">Accueil</a>
+        <a href="shop.html">Boutique</a>
+      </nav>
+      <div class="actions">
+        <button id="cartBtn" class="cart-btn">
+          🛒 <span id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding-top:30px;">
+    <div class="products-top">
+      <h2>Boutique</h2>
+      <span class="results-info" id="resultsInfo"></span>
+    </div>
+
+    <div class="controls">
+      <input type="text" id="searchInput" placeholder="Rechercher un produit...">
+      <select id="categoryFilter">
+        <option value="all">Toutes catégories</option>
+        <option value="Homme">Homme</option>
+        <option value="Femme">Femme</option>
+      </select>
+    </div>
+
+    <div id="productsGrid" class="products-grid">
+      <!-- Les cartes produits sont injectées par shop.js -->
+    </div>
+
+    <div id="productModal" class="modal" aria-hidden="true">
+      <div class="modal-content" id="modalBody">
+        <button class="modal-close" id="modalClose">&times;</button>
+      </div>
+    </div>
+
+    <aside id="cartPanel" class="cart-panel" aria-hidden="true">
+      <h3>Mon panier</h3>
+      <div id="cartList"></div>
+      <div class="cart-summary">
+        <strong>Total : <span id="cartTotal">0€</span></strong>
+        <button id="checkoutBtn" class="btn primary">Commander</button>
+        <button id="clearCart" class="btn">Vider le panier</button>
+      </div>
+
+      <form id="orderForm" class="hidden" aria-hidden="true">
+        <input type="text" name="fullname" placeholder="Nom complet" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <textarea name="address" placeholder="Adresse" required></textarea>
+        <button type="submit" class="btn primary">Valider la commande</button>
+        <p id="orderMsg"></p>
+      </form>
+    </aside>
+
+  </main>
+
+  <footer class="site-footer">
+    &copy; <span id="year"></span> Wardrobe
+  </footer>
+
+  <script src="shop.js"></script>
+  <script>
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    document.addEventListener('click', e => {
+      const view = e.target.closest('[data-action="view"]');
+      if(view){
+        const id = view.dataset.id;
+        window.location.href = `product.html?id=${id}`;
+      }
+    });
+  </script>
+
+</body>
+</html>
